@@ -19,7 +19,7 @@ depends 'mongodb'
 depends 'mysql', '~>5.6.1'
 depends 'redisio'
 depends 'ntp'
-depends 'git'
+depends 'git', '~>4.1.0'
 depends 'cron'
 
 supports 'debian'
