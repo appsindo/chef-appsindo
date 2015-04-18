@@ -1,13 +1,16 @@
 Appsindo Cookbook
 =================
 Appsindo Base Cookbook combining setups from:
+
 - http://html5boilerplate.com/
 - https://github.com/h5bp/server-configs-nginx
+- Each software recipes from Chef Cookbook
 
 Prerequisites
 -------------
 - ChefDK (https://downloads.getchef.com/chef-dk/)
 - vagrant-berkshelf plugin (if you are using vagrant)
+- Chef Solo for your server needs
 
 How To Use
 ----------
@@ -23,7 +26,7 @@ This is what I do in Vagrant
          }
       }
 
-      # the basic recipes for PHP development
+      # the basic recipes for PHP development (and some utilites)
       chef.add_recipe("apt")
       chef.add_recipe("appsindo")
       chef.add_recipe("appsindo::php")
@@ -34,7 +37,7 @@ This is what I do in Vagrant
       chef.add_recipe("appsindo::mysql")
 ```
 
-As for `chef-solo`, just convert ruby code above into JSON
+As for `chef-solo` just convert ruby code above into JSON
 
 Requirements
 ------------
