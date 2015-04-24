@@ -132,7 +132,7 @@ default['nginx']['configure_flags']    = []
 # Nginx from Source
 default['nginx']['source']['version']  = '1.6.2'
 default['nginx']['source']['url']      = "http://nginx.org/download/nginx-#{node['nginx']['source']['version']}.tar.gz"
-default['nginx']['source']['checksum'] = 'f5cfe682a1aeef4602c2ca705402d5049b748f946563f41d8256c18674836067'
+default['nginx']['source']['checksum'] = 'b5608c2959d3e7ad09b20fc8f9e5bd4bc87b3bc8ba5936a513c04ed8f1391a18'
 default['nginx']['source']['modules']  = %w(
   nginx::http_ssl_module
   nginx::http_gzip_static_module
