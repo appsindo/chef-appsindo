@@ -10,7 +10,7 @@ recipe "appsindo", "Default"
 
 depends 'build-essential', '~> 2.2.3'
 depends 'xml', '~> 1.2.13'
-depends 'apt', '~> 2.7.0'
+depends 'apt', '~> 2.8.2'
 depends 'php', '~> 1.5.0'
 depends 'nodejs' , '~> 1.3.0'
 depends 'mongodb', '~> 0.16.2'
