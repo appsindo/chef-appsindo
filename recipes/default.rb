@@ -20,6 +20,6 @@ include_recipe 'build-essential'
 include_recipe 'git'
 
 # basic dependencies for compiling things
-%w{curl re2c tar libsqlite3-dev zlib1g-dev libpcre3 libpcre3-dev unzip libxml2-utils}.each do |a_package|
+%w{curl re2c tar libssl-dev libsqlite3-dev zlib1g-dev libpcre3 libpcre3-dev unzip libxml2-utils}.each do |a_package|
   package a_package
 end

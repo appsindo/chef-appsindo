@@ -99,7 +99,53 @@ directory "/var/tmp/nginx/fcgi/" do
   action  :create
 end
 
-include_recipe "nginx"
+# nginx install from source :)
+#----------------------------
+src_filepath = "#{Chef::Config['file_cache_path'] || '/tmp'}/nginx-#{node['nginx']['source']['version']}.tar.gz"
+nginx_url    = node['nginx']['source']['url']
+
+remote_file nginx_url do
+  source   nginx_url
+  checksum node['nginx']['source']['checksum']
+  path     src_filepath
+  backup   false
+end
+
+node.run_state['nginx_force_recompile'] = false
+node.run_state['nginx_configure_flags'] =
+  node['nginx']['source']['default_configure_flags'] | node['nginx']['configure_flags']
+
+bash 'unarchive_source' do
+  cwd  ::File.dirname(src_filepath)
+  code <<-EOH
+    tar zxf #{::File.basename(src_filepath)} -C #{::File.dirname(src_filepath)}
+  EOH
+  not_if { ::File.directory?("#{Chef::Config['file_cache_path'] || '/tmp'}/nginx-#{node['nginx']['source']['version']}") }
+end
+
+configure_flags       = node.run_state['nginx_configure_flags']
+nginx_force_recompile = node.run_state['nginx_force_recompile']
+
+bash 'compile_nginx_source' do
+  cwd  ::File.dirname(src_filepath)
+  code <<-EOH
+    cd nginx-#{node['nginx']['source']['version']} &&
+    ./configure #{node.run_state['nginx_configure_flags'].join(' ')} &&
+    make && make install
+  EOH
+
+  not_if do
+    nginx_force_recompile == false &&
+      node.automatic_attrs['nginx'] &&
+      node.automatic_attrs['nginx']['version'] == node['nginx']['source']['version'] &&
+      node.automatic_attrs['nginx']['configure_arguments'].sort == configure_flags.sort
+  end
+
+  notifies :restart, 'service[nginx]'
+end
+
+
+
 
 is_dev = "";
 if node.default["environment"] == "development"
@@ -217,6 +263,12 @@ template "/etc/init/nginx.conf" do
     only_if { node['nginx']['init_style'] == 'upstart' }
 end
 
+service 'nginx' do
+    provider Chef::Provider::Service::Upstart
+    supports :status => true, :restart => true, :reload => true
+    action   :nothing
+end
+
 #---------------------------- Webappr
 # SNI limiter
 # This will block any host to use our instance IP
@@ -303,3 +355,10 @@ else
   end
 end
 
+service 'nginx' do
+  supports :status => true, :restart => true, :reload => true
+  action   :start
+end
+
+node.run_state.delete('nginx_configure_flags')
+node.run_state.delete('nginx_force_recompile')
