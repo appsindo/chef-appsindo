@@ -43,9 +43,10 @@ bash "add user #{localUser} to www-data" do
 end
 
 # Install Pagespeed
+# See : https://developers.google.com/speed/pagespeed/module/build_ngx_pagespeed_from_source
 #----------------------------
 is_pagespeed = node["nginx"]["is_pagespeed"]
-nps_version  = "1.9.32.2"
+nps_version  = "1.9.32.6"
 
 if is_pagespeed then
     # download Pagespeed and PSOL and compile
@@ -105,13 +106,21 @@ if node.default["environment"] == "development"
   is_dev = ".dev"
 end
 
-
 # Create /etc/nginx/appsindo.d for default includes
 #----------------------------
 directory "/etc/nginx/appsindo.d" do
   owner    "root"
   group    "root"
   mode     0755
+  action   :create
+end
+
+# Create /etc/nginx/keys.d for default keys
+#----------------------------
+directory "/etc/nginx/keys.d" do
+  owner    "root"
+  group    "root"
+  mode     0600
   action   :create
 end
 

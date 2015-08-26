@@ -8,9 +8,8 @@ Appsindo Base Cookbook combining setups from:
 
 Prerequisites
 -------------
-- ChefDK (https://downloads.getchef.com/chef-dk/)
+- ChefDK (https://downloads.getchef.com/chef-dk/) chef, chef-solo, berkshelf is included in it
 - vagrant-berkshelf plugin (if you are using vagrant)
-- Chef Solo for your server needs
 
 How To Use
 ----------
@@ -26,15 +25,18 @@ This is what I do in Vagrant
          }
       }
 
-      # the basic recipes for PHP development (and some utilites)
+      # the basic recipes for web development (and some utilites)
       chef.add_recipe("apt")
       chef.add_recipe("appsindo")
       chef.add_recipe("appsindo::php")
       chef.add_recipe("appsindo::php_composer")
       chef.add_recipe("appsindo::nginx")
+
+      # if you need these
       chef.add_recipe("appsindo::nodejs")
       chef.add_recipe("appsindo::redis")
       chef.add_recipe("appsindo::mysql")
+      chef.add_recipe("appsindo::mongo")
 ```
 
 As for `chef-solo` just convert ruby code above into JSON

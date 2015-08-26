@@ -87,7 +87,7 @@ default['nginx']['install_method']                    = "source"
 default['nginx']['init_style']                        = 'upstart'
 default['nginx']['is_pagespeed']                      = true
 default['nginx']['upstart']['foreground']             = false
-default['nginx']['source']['version']                 = '1.6.2'
+default['nginx']['source']['version']                 = '1.8.0'
 default['nginx']['default_site_enabled']              = false
 default['nginx']['source']['prefix']                  = "/etc/nginx"
 default['nginx']['dir']                               = '/etc/nginx'
@@ -130,9 +130,9 @@ default['nginx']['source']['default_configure_flags'] = %W(
 default['nginx']['configure_flags']    = []
 
 # Nginx from Source
-default['nginx']['source']['version']  = '1.6.2'
+default['nginx']['source']['version']  = '1.8.0'
 default['nginx']['source']['url']      = "http://nginx.org/download/nginx-#{node['nginx']['source']['version']}.tar.gz"
-default['nginx']['source']['checksum'] = 'b5608c2959d3e7ad09b20fc8f9e5bd4bc87b3bc8ba5936a513c04ed8f1391a18'
+default['nginx']['source']['checksum'] = '23cca1239990c818d8f6da118320c4979aadf5386deda691b1b7c2c96b9df3d5'
 default['nginx']['source']['modules']  = %w(
   nginx::http_ssl_module
   nginx::http_gzip_static_module
@@ -141,5 +141,5 @@ default['nginx']['source']['use_existing_user'] = false
 
 # Composer
 default["composer"]["globals"] = %w(
-  fxp/composer-asset-plugin:1.0.0-beta4
+  fxp/composer-asset-plugin:1.0.0
 )
