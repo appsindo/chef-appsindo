@@ -1,2 +1,3 @@
 chef.config
 berks-cookbooks/*
+Berksfile.lock

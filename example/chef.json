@@ -1,0 +1,22 @@
+{
+    "instance"    : "change-me",
+    "environment" : "production",
+    "www" : {
+        "user"  : "www-data",
+        "group" : "www-data"
+    },
+    "mysql" : {
+        "server_root_password"   : "change-me",
+        "server_debian_password" : "change-me"
+    },
+    "run_list" : [
+        "apt",
+        "appsindo",
+        "appsindo::nginx",
+        "appsindo::redis",
+        "appsindo::mongodb",
+        "appsindo::php",
+        "appsindo::php_composer",
+        "appsindo::php_mongo"
+    ]
+}
