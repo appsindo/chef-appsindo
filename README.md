@@ -39,7 +39,10 @@ This is what I do in Vagrant
       chef.add_recipe("appsindo::mongo")
 ```
 
-As for `chef-solo` just convert ruby code above into JSON
+Chef Solo
+------------
+See example folder for execution
+
 
 Requirements
 ------------
