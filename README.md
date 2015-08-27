@@ -41,7 +41,7 @@ This is what I do in Vagrant
 
 Chef Solo
 ------------
-See example folder for execution
+See example folder - copy to a save place. run `runme.sh`
 
 
 Requirements
