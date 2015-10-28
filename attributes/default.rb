@@ -141,5 +141,5 @@ default['nginx']['source']['use_existing_user'] = false
 
 # Composer
 default["composer"]["globals"] = %w(
-  fxp/composer-asset-plugin:1.0.0
+  fxp/composer-asset-plugin:1.0.3
 )

@@ -27,9 +27,10 @@ end
 
 # clone the source code of phpredis
 git "/tmp/phpmongo" do
-  repository  "https://github.com/mongodb/mongo-php-driver.git"
+  repository  "https ://github.com/mongodb/mongo-php-driver.git"
   revision    'master'
-  action      :sync
+  enable_submodules true
+  action             :sync
   not_if      "php -m | grep mongo"
 end
 
