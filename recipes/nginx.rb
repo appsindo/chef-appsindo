@@ -46,18 +46,19 @@ end
 # See : https://developers.google.com/speed/pagespeed/module/build_ngx_pagespeed_from_source
 #----------------------------
 is_pagespeed = node["nginx"]["is_pagespeed"]
-nps_version  = "1.9.32.6"
+nps_version  = "1.10.33.2"
 
 if is_pagespeed then
     # download Pagespeed and PSOL and compile
     bash "make & install pagespeed for nginx" do
       cwd  "/tmp/"
       code <<-EOF
-          wget https://github.com/pagespeed/ngx_pagespeed/archive/release-#{nps_version}-beta.zip
-          unzip release-#{nps_version}-beta.zip
-          cd ngx_pagespeed-release-#{nps_version}-beta/
-          wget https://dl.google.com/dl/page-speed/psol/#{nps_version}.tar.gz
-          tar -xzvf #{nps_version}.tar.gz
+          wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${nps_version}-beta.zip -O release-${nps_version}-beta.zip
+          unzip release-${nps_version}-beta.zip
+          cd ngx_pagespeed-release-${nps_version}-beta/
+
+          wget https://dl.google.com/dl/page-speed/psol/${nps_version}.tar.gz
+          tar -xzvf ${nps_version}.tar.gz
       EOF
     end
 
