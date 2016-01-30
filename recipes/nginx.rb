@@ -53,12 +53,12 @@ if is_pagespeed then
     bash "make & install pagespeed for nginx" do
       cwd  "/tmp/"
       code <<-EOF
-          wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${nps_version}-beta.zip -O release-${nps_version}-beta.zip
-          unzip release-${nps_version}-beta.zip
-          cd ngx_pagespeed-release-${nps_version}-beta/
+          wget https://github.com/pagespeed/ngx_pagespeed/archive/release-#{nps_version}-beta.zip -O release-#{nps_version}-beta.zip
+          unzip release-#{nps_version}-beta.zip
+          cd ngx_pagespeed-release-#{nps_version}-beta/
 
-          wget https://dl.google.com/dl/page-speed/psol/${nps_version}.tar.gz
-          tar -xzvf ${nps_version}.tar.gz
+          wget https://dl.google.com/dl/page-speed/psol/#{nps_version}.tar.gz
+          tar -xzvf #{nps_version}.tar.gz
       EOF
     end
 
