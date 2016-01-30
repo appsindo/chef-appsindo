@@ -2,7 +2,7 @@
 # Cookbook Name:: appsindo
 # Recipe:: php_mongo
 # Descriptions::
-#    Will install PHP Mongo Module from Source
+#    Will install PHP Mongo Module from Source (The old one)
 #
 # Copyright 2014, PT Appsindo Technology as BSD-style found in the LICENSE file
 #
@@ -12,34 +12,9 @@
 include_recipe "build-essential"
 include_recipe "git"
 
-# build dependencies
-package "make" do
-  action   :install
-end
-
-# prepare temporary folder
-directory "/tmp/phpmongo" do
-  owner   "root"
-  group   "root"
-  mode    "0755"
-  action  :create
-end
-
-# clone the source code of phpredis
-git "/tmp/phpmongo" do
-  repository  "https://github.com/mongodb/mongo-php-driver.git"
-  revision    'master'
-  enable_submodules true
-  action             :sync
-  not_if      "php -m | grep mongo"
-end
-
-bash "make & install mongo" do
-  cwd   "/tmp/phpmongo"
+bash "install old mongo" do
   code <<-EOF
-      phpize
-      ./configure
-      make && make install
+    printf "\n" | pecl install mongo
   EOF
   not_if "php -m | grep mongo"
 end
