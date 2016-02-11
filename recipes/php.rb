@@ -12,11 +12,7 @@
 #
 
 if node.default['php']['install_method'] == 'package' then
-    if node.default['php']['version'] != '5.5.9' then
-        include_recipe "appsindo::php_package56"
-    else
-        include_recipe "appsindo::php_package"
-    end
+    include_recipe "appsindo::php_package56"
 else
     include_recipe "appsindo::php_source"
 end
